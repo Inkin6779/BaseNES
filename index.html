@@ -1,42 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAME NES Emulator</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mame/0.227/mame.js"></script>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-        #emulator {
-            border: 2px solid #333;
-            width: 640px;
-            height: 480px;
-        }
-    </style>
-</head>
-<body>
-    <div id="emulator"></div>
-    <script>
-        const emulator = document.getElementById('emulator');
-        const nesFile = '7.nes'; // Replace with the actual path to your .nes file
-
-        // Initialize MAME with the NES file
-        MAME.init({
-            element: emulator,
-            rom: nesFile,
-            onLoad: function() {
-                console.log('Game loaded successfully!');
-            },
-            onError: function(error) {
-                console.error('Error loading game:', error);
-            }
-        });
-    </script>
-</body>
+<html>
+  <head>
+    <title>Game Name</title>
+  </head>
+  <body>
+    <div style="text-align: center;">
+    <embed src="7.nes" width="100%" height="100%">
+    </div>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/mame/0.227/mame.js"></script>
+  </body>
 </html>
