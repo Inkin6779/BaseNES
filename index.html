@@ -1,26 +1,41 @@
-<html>
-  <head>
-    <title>Game Name</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mame/0.227/mame.js"></script>
-  </head>
-  <body>
-    <div style="text-align: center;">
-      <h1>Welcome to the Game</h1>
-      <canvas id="gameCanvas" width="640" height="480"></canvas>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 GRAND DAD</title>
+    <style>
+        body {
+            background-color: #FFFFFF;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>7 GRAND DAD</h1>
+    <canvas id="nesCanvas" width="256" height="240"></canvas>
+
+    <script src="https://raw.githubusercontent.com/bfirsh/jsnes/master/jsnes.js"></script>
     <script>
-      const canvas = document.getElementById('gameCanvas');
-      const gameFile = '7.nes';
+        const canvas = document.getElementById('nesCanvas');
+        const nes = new JSNES({
+            onFrame: function(framebuffer) {
+                const imageData = new ImageData(new Uint8ClampedArray(framebuffer), 256, 240);
+                const ctx = canvas.getContext('2d');
+                ctx.putImageData(imageData, 0, 0);
+            }
+        });
 
-      // Initialize MAME with the canvas
-      MAME.init(canvas);
-
-      // Load the game file
-      MAME.loadGame(gameFile).then(() => {
-        console.log('Game loaded successfully');
-      }).catch(error => {
-        console.error('Error loading game:', error);
-      });
+        fetch('7.nes')
+            .then(response => response.arrayBuffer())
+            .then(buffer => nes.loadROM(buffer))
+            .catch(err => console.error('Error loading ROM:', err));
     </script>
-  </body>
+</body>
 </html>
