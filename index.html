@@ -1,53 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play 7.nes</title>
-    <style>
-        body {
-            background-color: #FFFFFF;
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        canvas {
-            border: 1px solid black;
-            display: block;
-            margin: 0 auto;
-        }
-        #insertCardButton {
-            padding: 10px 20px;
-            font-size: 18px;
-            margin: 20px auto;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <h1>Play 7.nes</h1>
-    <button id="insertCardButton">Insert Card!</button>
-    <canvas id="nesCanvas" width="256" height="240" style="display: none;"></canvas>
 
+<html>
+  <head>
+    <title>7 GRAND DAD</title>
+  </head>
+  <body>
+    <div style="text-align: center;">
+    <embed src="7.nes" width="100%" height="100%">
+    </div>
     <script src="https://raw.githubusercontent.com/bfirsh/jsnes/master/jsnes.js"></script>
-    <script>
-        const canvas = document.getElementById('nesCanvas');
-        const nes = new JSNES({
-            onFrame: function(framebuffer) {
-                const imageData = new ImageData(new Uint8ClampedArray(framebuffer), 256, 240);
-                const ctx = canvas.getContext('2d');
-                ctx.putImageData(imageData, 0, 0);
-            }
-        });
-
-        document.getElementById('insertCardButton').addEventListener('click', function() {
-            fetch('7.nes')  // Ensure the filename matches exactly
-                .then(response => response.arrayBuffer())
-                .then(buffer => {
-                    nes.loadROM(buffer);
-                    canvas.style.display = 'block'; // Show the canvas
-                })
-                .catch(err => console.error('Error loading ROM:', err));
-        });
-    </script>
-</body>
+  </body>
 </html>
