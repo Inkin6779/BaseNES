@@ -15,11 +15,18 @@
             display: block;
             margin: 0 auto;
         }
+        #insertCardButton {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 20px auto;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1>Play 7.nes</h1>
-    <canvas id="nesCanvas" width="256" height="240"></canvas>
+    <button id="insertCardButton">Insert Card!</button>
+    <canvas id="nesCanvas" width="256" height="240" style="display: none;"></canvas>
 
     <script src="https://raw.githubusercontent.com/bfirsh/jsnes/master/jsnes.js"></script>
     <script>
@@ -32,10 +39,15 @@
             }
         });
 
-        fetch('7.nes')  // Ensure the filename matches exactly
-            .then(response => response.arrayBuffer())
-            .then(buffer => nes.loadROM(buffer))
-            .catch(err => console.error('Error loading ROM:', err));
+        document.getElementById('insertCardButton').addEventListener('click', function() {
+            fetch('7.nes')  // Ensure the filename matches exactly
+                .then(response => response.arrayBuffer())
+                .then(buffer => {
+                    nes.loadROM(buffer);
+                    canvas.style.display = 'block'; // Show the canvas
+                })
+                .catch(err => console.error('Error loading ROM:', err));
+        });
     </script>
 </body>
 </html>
