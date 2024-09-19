@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>7 GRAND DAD</title>
+    <title>Play 7.nes</title>
     <style>
         body {
             background-color: #FFFFFF;
@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <h1>7 GRAND DAD</h1>
+    <h1>Play 7.nes</h1>
     <canvas id="nesCanvas" width="256" height="240"></canvas>
 
     <script src="https://raw.githubusercontent.com/bfirsh/jsnes/master/jsnes.js"></script>
@@ -32,7 +32,7 @@
             }
         });
 
-        fetch('7.nes')
+        fetch('7.nes')  // Ensure the filename matches exactly
             .then(response => response.arrayBuffer())
             .then(buffer => nes.loadROM(buffer))
             .catch(err => console.error('Error loading ROM:', err));
