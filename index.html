@@ -1,12 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NES Emulator</title>
+    <script src="path/to/jsnes.js"></script> <!-- Link to the jsNES script -->
+    <style>
+        #nes {
+            width: 256px; /* Set the width of the emulator */
+            height: 240px; /* Set the height of the emulator */
+            border: 1px solid #000; /* Optional: Add a border */
+        }
+    </style>
+</head>
+<body>
+    <h1>Play NES Game</h1>
+    <canvas id="nes"></canvas>
+    <script>
+        const nes = new jsnes.NES({
+            onFrame: function(frameBuffer) {
+                const canvas = document.getElementById('nes');
+                const context = canvas.getContext('2d');
+                const imageData = context.createImageData(256, 240);
+                imageData.data.set(frameBuffer);
+                context.putImageData(imageData, 0, 0);
+            },
+            onAudioSample: function(sample) {
+                // Handle audio samples if needed
+            }
+        });
 
-<html>
-  <head>
-    <title>7 GRAND DAD</title>
-  </head>
-  <body>
-    <div style="text-align: center;">
-    <embed src="7.nes" width="100%" height="100%">
-    </div>
-    <script src="https://raw.githubusercontent.com/bfirsh/jsnes/master/jsnes.js"></script>
-  </body>
+        fetch('path/to/game.nes') // Path to your .nes file
+            .then(response => response.arrayBuffer())
+            .then(data => nes.loadROM(data))
+            .then(() => nes.start());
+    </script>
+</body>
 </html>
