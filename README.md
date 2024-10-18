@@ -1,3 +1,2 @@
-An example app to demonstrate a simple way to embed JSNES.
-
-ROM is by @slembcke: https://github.com/slembcke/InterglacticTransmissing
+#Base for NES Games
+This is a template of producing NES games in Project School Stash
